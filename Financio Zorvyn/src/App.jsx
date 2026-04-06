@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./Components/Layout";
 import Overview from "./Components/Overview";
@@ -7,7 +7,7 @@ import Insights from "./Components/Insights";
 
 function App() {
   return (
-    <Router basename="/Financio-Finance-Assistant">
+    <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
