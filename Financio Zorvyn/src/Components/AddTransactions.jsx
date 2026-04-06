@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addTransaction } from "E:/Yash Front-End/Yash React/Financio Zorvyn/Financio Zorvyn/src/Redux/transactionSlice.js";
+import { addTransaction } from "../Redux/transactionSlice.js";
 import { useState } from "react";
 
 const categories = [

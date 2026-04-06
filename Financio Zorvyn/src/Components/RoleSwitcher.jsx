@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setRole } from "E:/Yash Front-End/Yash React/Financio Zorvyn/Financio Zorvyn/src/Redux/transactionSlice.js"
+import { setRole } from "../Redux/transactionSlice.js"
 
 function RoleSwitcher() {
   const dispatch = useDispatch();

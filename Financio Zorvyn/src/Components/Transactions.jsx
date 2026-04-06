@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setSearch , deleteTransaction } from "E:/Yash Front-End/Yash React/Financio Zorvyn/Financio Zorvyn/src/Redux/transactionSlice.js";
+import { setSearch , deleteTransaction } from "../Redux/transactionSlice.js";
 import AddTransaction from "./AddTransactions";
 import { useState } from "react";
 
@@ -37,9 +37,6 @@ const filtered = transactions.filter(t => {
 
   return matchSearch && matchType && matchCategory;
 });
-if (!filtered.length) {
-  return <div className="empty">No transactions found</div>;
-}
 
 
   const exportCSV = () => {
@@ -82,6 +79,8 @@ if (!filtered.length) {
 <select onChange={(e) => setCategoryFilter(e.target.value)}>
   {categories.map(c => <option key={c} value={c}>{c}</option>)}
 </select>
+
+  {!filtered.length && <div className="empty">No transactions found</div>}
 
       {filtered.map(t => (
         

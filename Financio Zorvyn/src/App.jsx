@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from "./Components/Homepage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
 import Layout from "./Components/Layout";
 import Overview from "./Components/Overview";
 import Transactions from "./Components/Transactions";
@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         <Route path="/dashboard" element={<Layout />}>
           <Route index element={<Overview />} />
