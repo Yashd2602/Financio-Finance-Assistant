@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip,
-  ResponsiveContainer, BarChart, Bar
+  AreaChart, Area, XAxis, YAxis, Tooltip,
+  ResponsiveContainer, BarChart, Bar,
+  RadialBarChart, RadialBar, Legend
 } from "recharts";
 
 function SummaryCards() {
@@ -72,13 +73,13 @@ function SummaryCards() {
       <div className="card">
         <h3>Daily (This Month)</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={dailyData}>
+          <AreaChart data={dailyData}>
             <XAxis dataKey="day"/>
             <YAxis/>
             <Tooltip/>
-            <Line dataKey="income" stroke="#4ade80"/>
-            <Line dataKey="expense" stroke="#f87171"/>
-          </LineChart>
+            <Area type="monotone" dataKey="income" stroke="#4ade80" fill="#4ade8033"/>
+            <Area type="monotone" dataKey="expense" stroke="#f87171" fill="#f8717133"/>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
 
@@ -86,12 +87,12 @@ function SummaryCards() {
       <div className="card">
         <h3>Monthly (This Year)</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={monthlyData}>
-            <XAxis dataKey="month"/>
-            <YAxis/>
+          <BarChart data={monthlyData} layout="vertical">
+            <XAxis type="number"/>
+            <YAxis type="category" dataKey="month" width={40}/>
             <Tooltip/>
-            <Bar dataKey="income" fill="#4ade80"/>
-            <Bar dataKey="expense" fill="#f87171"/>
+            <Bar dataKey="income" fill="#4ade80" radius={[0,6,6,0]}/>
+            <Bar dataKey="expense" fill="#f87171" radius={[0,6,6,0]}/>
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -100,13 +101,18 @@ function SummaryCards() {
       <div className="card">
         <h3>Yearly (All Time)</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={yearlyData}>
-            <XAxis dataKey="year"/>
-            <YAxis/>
+          <RadialBarChart
+            innerRadius="20%"
+            outerRadius="90%"
+            data={yearlyData.map(y => ([
+              { name: `${y.year} Income`, value: y.income, fill: '#4ade80' },
+              { name: `${y.year} Expense`, value: y.expense, fill: '#f87171' }
+            ])).flat()}
+          >
+            <RadialBar dataKey="value" label={{ position: 'insideStart', fill: '#fff', fontSize: 11 }}/>
+            <Legend/>
             <Tooltip/>
-            <Bar dataKey="income" fill="#4ade80"/>
-            <Bar dataKey="expense" fill="#f87171"/>
-          </BarChart>
+          </RadialBarChart>
         </ResponsiveContainer>
       </div>
 

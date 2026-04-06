@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip,
-  ResponsiveContainer, BarChart, Bar
+  AreaChart, Area, XAxis, YAxis, Tooltip,
+  ResponsiveContainer, ComposedChart, Bar, Line,
+  PieChart, Pie, Cell, Legend
 } from "recharts";
 
 function Insights() {
@@ -33,12 +34,12 @@ function Insights() {
       <div className="card">
         <h3>Expenses Trend</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={data}>
+          <AreaChart data={data}>
             <XAxis dataKey="month"/>
             <YAxis/>
             <Tooltip/>
-            <Line dataKey="expense" stroke="#f87171"/>
-          </LineChart>
+            <Area type="monotone" dataKey="expense" stroke="#f87171" fill="#f8717133"/>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
 
@@ -46,12 +47,13 @@ function Insights() {
       <div className="card">
         <h3>Savings Trend</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={data}>
+          <ComposedChart data={data}>
             <XAxis dataKey="month"/>
             <YAxis/>
             <Tooltip/>
-            <Line dataKey="savings" stroke="#60a5fa"/>
-          </LineChart>
+            <Bar dataKey="savings" fill="#60a5fa33" radius={[6,6,0,0]}/>
+            <Line type="monotone" dataKey="savings" stroke="#60a5fa" dot={false}/>
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
 
@@ -59,13 +61,23 @@ function Insights() {
       <div className="card">
         <h3>Income vs Expense</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <XAxis dataKey="month"/>
-            <YAxis/>
+          <PieChart>
+            <Pie
+              data={[
+                { name: 'Income', value: data.reduce((s, d) => s + d.income, 0) },
+                { name: 'Expense', value: data.reduce((s, d) => s + d.expense, 0) }
+              ]}
+              cx="50%" cy="50%"
+              innerRadius={60} outerRadius={100}
+              dataKey="value"
+              label
+            >
+              <Cell fill="#4ade80"/>
+              <Cell fill="#f87171"/>
+            </Pie>
+            <Legend/>
             <Tooltip/>
-            <Bar dataKey="income" fill="#4ade80"/>
-            <Bar dataKey="expense" fill="#f87171"/>
-          </BarChart>
+          </PieChart>
         </ResponsiveContainer>
       </div>
 
