@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
 import Layout from "./Components/Layout";
 import Overview from "./Components/Overview";
@@ -7,7 +7,7 @@ import Insights from "./Components/Insights";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Financio-Finance-Assistant">
       <Routes>
         <Route path="/" element={<Homepage />} />
 
