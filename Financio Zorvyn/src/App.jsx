@@ -8,17 +8,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        <Route path="/dashboard" element={<Layout />}>
           <Route index element={<Overview />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="insights" element={<Insights />} />
         </Route>
 
-        <Route path="/dashboard" element={<Navigate to="/" replace />} />
-        <Route path="/dashboard/transactions" element={<Navigate to="/transactions" replace />} />
-        <Route path="/dashboard/insights" element={<Navigate to="/insights" replace />} />
-
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
   );
