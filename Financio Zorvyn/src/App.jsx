@@ -7,7 +7,7 @@ import Insights from "./Components/Insights";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Financio-Finance-Assistant">
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
