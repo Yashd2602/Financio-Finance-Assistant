@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from "./Components/Homepage";
 import Layout from "./Components/Layout";
 import Overview from "./Components/Overview";
 import Transactions from "./Components/Transactions";
 import Insights from "./Components/Insights";
+import Dashboard from "./Components/Dashboard";
 
 function App() {
   return (
     <Router basename="/Financio-Finance-Assistant">
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Dashboard />} />
 
         <Route path="/dashboard" element={<Layout />}>
           <Route index element={<Overview />} />
